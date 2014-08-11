@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.diego.web;
 
 import java.io.Serializable;
@@ -22,10 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author Admin
- */
 @Entity
 @Table(name = "banda")
 @NamedQueries({
@@ -49,6 +39,15 @@ public class Banda implements Serializable {
     @ManyToOne
     private Discografica discografica;
 
+    public Banda(Integer idBanda, String nombre, String pais, Collection<Disco> discoCollection, Discografica discografica) {
+        this.idBanda = idBanda;
+        this.nombre = nombre;
+        this.pais = pais;
+        this.discoCollection = discoCollection;
+        this.discografica = discografica;
+    }
+
+     
     public Banda() {
     }
 
