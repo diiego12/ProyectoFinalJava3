@@ -16,8 +16,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "discografica")
-@NamedQueries({
-    @NamedQuery(name = "Discografica.findAll", query = "SELECT d FROM Discografica d")})
+
 public class Discografica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,18 +30,15 @@ public class Discografica implements Serializable {
     @Size(max = 50)
     @Column(name = "pais")
     private String pais;
-    @OneToMany(mappedBy = "discografica")
-    private Collection<Banda> bandaCollection;
+    
 
-    public Discografica(Integer idDiscografica, String nombre, String pais, Collection<Banda> bandaCollection) {
+    public Discografica(Integer idDiscografica, String nombre, String pais) {
         this.idDiscografica = idDiscografica;
         this.nombre = nombre;
         this.pais = pais;
-        this.bandaCollection = bandaCollection;
     }
-    
-    
 
+         
     public Discografica() {
     }
 
@@ -72,14 +68,6 @@ public class Discografica implements Serializable {
 
     public void setPais(String pais) {
         this.pais = pais;
-    }
-
-    public Collection<Banda> getBandaCollection() {
-        return bandaCollection;
-    }
-
-    public void setBandaCollection(Collection<Banda> bandaCollection) {
-        this.bandaCollection = bandaCollection;
     }
 
     @Override

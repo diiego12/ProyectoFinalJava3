@@ -39,15 +39,13 @@ public class Banda implements Serializable {
     @ManyToOne
     private Discografica discografica;
 
-    public Banda(Integer idBanda, String nombre, String pais, Collection<Disco> discoCollection, Discografica discografica) {
-        this.idBanda = idBanda;
+    public Banda(String nombre, String pais, Discografica discografica) {
         this.nombre = nombre;
         this.pais = pais;
-        this.discoCollection = discoCollection;
         this.discografica = discografica;
     }
 
-     
+       
     public Banda() {
     }
 

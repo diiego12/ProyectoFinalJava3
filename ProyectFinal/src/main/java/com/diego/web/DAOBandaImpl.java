@@ -14,14 +14,14 @@ public class DAOBandaImpl extends DAO{
         close();
     }
     
-    public void borrarDisco(Banda b){
+    public void borrarBanda(Banda b){
         begin();
         getSession().delete(b);
         commit();
         close();
     }
     
-    public void actualizarDisco(Banda b){
+    public void actualizarBanda(Banda b){
         begin();
         getSession().update(b);
         commit();
