@@ -3,34 +3,35 @@ package com.diego.web;
 import static com.diego.web.DAO.close;
 import static com.diego.web.DAO.getSession;
 import java.util.ArrayList;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 
 public class DAOBandaImpl extends DAO{
     
-    public void agregarBanda(Banda b) {
+    public static void agregarBanda(Banda b) {
         begin();
         getSession().save(b);
         commit();
         close();
     }
     
-    public void borrarBanda(Banda b){
+    public static void borrarBanda(Banda b){
         begin();
         getSession().delete(b);
         commit();
         close();
     }
     
-    public void actualizarBanda(Banda b){
+    public static void actualizarBanda(Banda b){
         begin();
         getSession().update(b);
         commit();
         close();
     }
     
-    public ArrayList<Banda> buscarTodosBanda() {
+    public static ArrayList<Banda> buscarTodosBanda() {
         begin();
-        Query q = getSession().createQuery("from Banda");
+        Criteria q = getSession().createCriteria(Banda.class);
         ArrayList<Banda> bd = (ArrayList<Banda>)q.list();
         commit();
         close();
@@ -38,7 +39,7 @@ public class DAOBandaImpl extends DAO{
     }
     
       
-    public Banda buscarPorId(int id){
+    public static Banda buscarPorId(int id){
         begin();
         Query q = getSession().createQuery("from Banda where id = :id");
         q.setInteger("id",id);

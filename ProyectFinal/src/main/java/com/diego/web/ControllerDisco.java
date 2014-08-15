@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class ControllerDisco {
     @RequestMapping(value= "/disco/{titulo}/{banda}/{año}/{id_banda}",method = RequestMethod.GET,headers = {"Accept=text/html"})
-    public @ResponseBody String agregarDisco(@PathVariable String titulo, @PathVariable String banda, @PathVariable @PathVariable int año, @PathVariable int id_banda){
+    public @ResponseBody String agregarDisco(@PathVariable String titulo, @PathVariable String banda, @PathVariable int año, @PathVariable int id_banda){
         try{
          DAODiscoImpl dd = new DAODiscoImpl();
          dd.agregarDisco(new Disco(titulo, banda, año, new Banda(id_banda)));
@@ -23,7 +23,7 @@ public class ControllerDisco {
     }
     
      @RequestMapping(value= "/disco/{titulo}/{banda}/{año}/{id_banda}",method = RequestMethod.PUT,headers = {"Accept=text/html"})
-     public @ResponseBody String actualizarDisco(@PathVariable String titulo, @PathVariable String banda, @PathVariable @PathVariable int año, @PathVariable int id_banda){
+     public @ResponseBody String actualizarDisco(@PathVariable String titulo, @PathVariable String banda, @PathVariable int año, @PathVariable int id_banda){
          try{
          DAODiscoImpl dd = new DAODiscoImpl();
          dd.actualizarDisco(new Disco(titulo, banda, año,new Banda(id_banda)));
@@ -34,7 +34,7 @@ public class ControllerDisco {
      }
     
     @RequestMapping(value= "/disco/{id_disco}",method = RequestMethod.DELETE,headers = {"Accept=text/html"})
-    public @ResponseBody String eliminar(@PathVariable int id_disco){
+    public @ResponseBody String eliminarDisco(@PathVariable int id_disco) throws IOException{
         try{
          DAODiscoImpl dd = new DAODiscoImpl();
          dd.borrarDisco(new Disco(id_disco));
@@ -42,14 +42,20 @@ public class ControllerDisco {
         }catch(Exception e){
             return "No se ha encontrado el id";
         }
+    }    
     
     @RequestMapping(value= "/disco",method = RequestMethod.GET,headers = {"Accept=Application/json"})  
-    public @ResponseBody String buscarTodosDiscos() throws IOException{
-        ObjectMapper mapper1 = new ObjectMapper(); 
-        return mapper1.writeValueAsString(DAODiscoImpl.buscarTodosDisco());
-    }
+    public @ResponseBody  String bucarTodos() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(DAODiscoImpl.buscarTodosDiscos());
         
     }
+        
+    @RequestMapping(value= "/disco/{id_disco}",method = RequestMethod.GET,headers = {"Accept=text/html"}) 
+    public @ResponseBody String buscarID(@PathVariable int id_disco){
+        return DAODiscoImpl.buscarPorId(id_disco).toString();
+    } 
+}
     
    
-}
+

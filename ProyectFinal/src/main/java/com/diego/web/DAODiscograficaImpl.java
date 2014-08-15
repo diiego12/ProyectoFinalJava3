@@ -3,25 +3,26 @@ package com.diego.web;
 import static com.diego.web.DAO.close;
 import static com.diego.web.DAO.getSession;
 import java.util.ArrayList;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 
 public class DAODiscograficaImpl extends DAO{
     
-    public void agregarDiscografica(Discografica ds) {
+    public static void agregarDiscografica(Discografica ds) {
         begin();
         getSession().save(ds);
         commit();
         close();
     }
     
-    public void borrarDiscografica(Discografica ds){
+    public static void borrarDiscografica(Discografica ds){
         begin();
         getSession().delete(ds);
         commit();
         close();
     }
     
-    public void actualizarDiscografica(Discografica ds){
+    public static void actualizarDiscografica(Discografica ds){
         begin();
         getSession().update(ds);
         commit();
@@ -29,9 +30,9 @@ public class DAODiscograficaImpl extends DAO{
         
     }
     
-    public ArrayList<Discografica> buscarTodosDiscografica() {
+    public static ArrayList<Discografica> buscarTodosDiscografica() {
         begin();
-        Query q = getSession().createQuery("from Discografica");
+        Criteria q = getSession().createCriteria(Discografica.class);
         ArrayList<Discografica> dsc = (ArrayList<Discografica>)q.list();
         commit();
         close();
@@ -39,7 +40,7 @@ public class DAODiscograficaImpl extends DAO{
     }
     
     
-    public Discografica buscarPorId(int id){
+    public static Discografica buscarPorId(int id){
         begin();
         Query q = getSession().createQuery("from Discografica where id = :id");
         q.setInteger("id",id);
